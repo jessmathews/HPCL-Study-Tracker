@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = 49153;
 const DATA_DIR = path.join(__dirname, 'data');
 
 const USERS = ['Vppk', 'Jez'];
