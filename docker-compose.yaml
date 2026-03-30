@@ -4,6 +4,6 @@ services:
     container_name: hpcl-tracker-container
     restart: unless-stopped
     ports:
-      - "3000:3001"
+      - "49153:49153"
     volumes:
       - ./data:/app/data
