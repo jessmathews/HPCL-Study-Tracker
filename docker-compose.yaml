@@ -1,0 +1,9 @@
+services:
+  hpcl-tracker:
+    image: hpcl_tracker:latest
+    container_name: hpcl-tracker-container
+    restart: unless-stopped
+    ports:
+      - "3000:3001"
+    volumes:
+      - ./data:/app/data

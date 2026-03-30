@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HPCL — Study Tracker</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lora:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="save-indicator">
+  <div class="dot"></div>
+  <span id="save-text">Synced</span>
+</div>
+
+<div id="user-bar">
+  <div class="avatar" id="user-avatar">—</div>
+  <span class="user-label">Viewing</span>
+  <select id="user-select"></select>
+</div>
+
+<div id="page-overlay"></div>
+
+<div class="container">
+
+  <div class="header">
+    <div>
+      <div class="header-eyebrow">HPCL · Electrical Engineering Positions</div>
+      <h1>Study <span>Tracker</span></h1>
+      <div class="header-sub">4-week preparation plan · 6 subjects · ~160 hours</div>
+    </div>
+    <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+      <div class="exam-date-box">
+        <label>Days Left</label>
+        <div id="days-left">—</div>
+        <div class="days-unit">until exam</div>
+        <div class="exam-date-input-wrap">
+          <input type="date" id="exam-date" title="Set your exam date">
+        </div>
+      </div>
+      <button class="reset-btn" onclick="resetAll()">↺ Reset All</button>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="stat-card s-gold">
+      <div class="stat-label">Overall Progress</div>
+      <div class="stat-value" id="stat-overall" style="color:var(--accent)">0%</div>
+      <div class="stat-sub" id="stat-topics-done">0 / 0 topics done</div>
+    </div>
+    <div class="stat-card s-green">
+      <div class="stat-label">Hours Planned</div>
+      <div class="stat-value" style="color:var(--green)">160</div>
+      <div class="stat-sub">hrs across 4 weeks</div>
+    </div>
+    <div class="stat-card s-blue">
+      <div class="stat-label">Current Week</div>
+      <div class="stat-value" id="stat-week" style="color:var(--blue)">W1</div>
+      <div class="stat-sub">Foundations</div>
+    </div>
+    <div class="stat-card s-purple">
+      <div class="stat-label">Avg Confidence</div>
+      <div class="stat-value" id="stat-conf" style="color:var(--purple)">—</div>
+      <div class="stat-sub">out of 5 stars</div>
+    </div>
+  </div>
+
+  <div class="overview-row">
+    <div class="ring-card">
+      <canvas id="ringCanvas" width="160" height="160"></canvas>
+      <div class="ring-label">Overall Completion</div>
+    </div>
+    <div class="week-card">
+      <h3>Week-by-week progress</h3>
+      <div id="week-bars"></div>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-top:8px;">
+    <h2>Subject Confidence</h2>
+    <span class="section-pill" style="color:var(--purple);border-color:rgba(109,63,160,0.25);background:var(--purple-lt);">Rate yourself</span>
+  </div>
+  <div class="confidence-row" id="conf-row"></div>
+
+  <div class="section-header">
+    <h2>Topic Checklist</h2>
+    <span class="section-pill" style="color:var(--accent2);border-color:rgba(181,101,29,0.25);background:var(--accent-lt);">Click to mark done</span>
+  </div>
+  <div class="subject-grid" id="subject-grid"></div>
+
+  <div class="section-header" style="margin-top:32px;">
+    <h2>Quick Notes</h2>
+  </div>
+  <div class="notes-grid">
+    <div class="note-card">
+      <label>Weak Areas</label>
+      <textarea id="note-weak" placeholder="Topics you struggle with..."></textarea>
+    </div>
+    <div class="note-card">
+      <label>Resources</label>
+      <textarea id="note-res" placeholder="Books, YouTube channels, PYQ sources..."></textarea>
+    </div>
+    <div class="note-card">
+      <label>Mock Test Scores</label>
+      <textarea id="note-mock" placeholder="Test 1: /170, Test 2: /170..."></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
