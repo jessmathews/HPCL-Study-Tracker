@@ -1,3 +1,4 @@
+const BASE_PATH = process.env.BASE_URL || '/';
 const SUBJECTS = [
   {
     id: 'ps', name: 'Power Systems', hours: 40, week: 'W1–W2',
@@ -182,7 +183,7 @@ function setSaveStatus(status, msg) {
 
 async function loadFromServer() {
   try {
-    const res = await fetch(`/api/progress/${encodeURIComponent(currentUser)}`);
+    const res = await fetch(`${BASE_PATH}api/progress/${encodeURIComponent(currentUser)}`);
     if (!res.ok) throw new Error('Server error');
     const json = await res.json();
     if (json.ok && json.data) Object.assign(state, json.data);
