@@ -5,11 +5,12 @@ const path = require('path');
 const app = express();
 const PORT = 49153;
 const DATA_DIR = path.join(__dirname, 'data');
-
+const BASE_PATH = process.env.BASE_URL || '/';
 const USERS = ['Vppk', 'Jez'];
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(BASE_PATH, express.static(path.join(__dirname,'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
 
@@ -43,17 +44,17 @@ function validateUser(username) {
   return USERS.map(u => u.toLowerCase()).includes((username || '').toLowerCase());
 }
 
-app.get('/api/users', (req, res) => {
+app.get(`${BASE_PATH}api/users`, (req, res) => {
   res.json({ ok: true, users: USERS });
 });
 
-app.get('/api/progress/:user', (req, res) => {
+app.get(`${BASE_PATH}api/progress/:user`, (req, res) => {
   const user = req.params.user;
   if (!validateUser(user)) return res.status(403).json({ ok: false, error: 'Unknown user' });
   res.json({ ok: true, data: readData(user) });
 });
 
-app.post('/api/progress/:user', (req, res) => {
+app.post(`${BASE_PATH}api/progress/:user`, (req, res) => {
   const user = req.params.user;
   if (!validateUser(user)) return res.status(403).json({ ok: false, error: 'Unknown user' });
   const incoming = req.body;
@@ -64,7 +65,7 @@ app.post('/api/progress/:user', (req, res) => {
   res.json({ ok, savedAt: new Date().toISOString() });
 });
 
-app.get('/api/status', (req, res) => {
+app.get(`${BASE_PATH}api/status`, (req, res) => {
   const status = USERS.map(u => {
     const file = userFile(u);
     return {
@@ -78,6 +79,6 @@ app.get('/api/status', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n  HPCL Study Tracker running at http://localhost:${PORT}`);
+  console.log(`\n  HPCL Study Tracker running at http://localhost:${PORT}${BASE_PATH}`);
   console.log(`  Users: ${USERS.join(', ')}\n`);
 });
